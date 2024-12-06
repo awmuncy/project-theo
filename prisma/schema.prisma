@@ -12,6 +12,34 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
+  externalId String @unique
   email String  @unique
   name  String?
+  inventory Inventory[]
+}
+
+model Inventory {
+  id        Int     @id @default(autoincrement())
+  name      String
+  quantity  Int
+  ownerId   Int
+  owner     User    @relation(fields: [ownerId], references: [id])
+  items     ItemInstance[]
+}
+
+model ItemInstance {
+  id        Int     @id @default(autoincrement())
+  name      String
+  quantity  Int
+  inventoryId Int
+  inventory Inventory @relation(fields: [inventoryId], references: [id])
+}
+
+model Item {
+  id        Int     @id @default(autoincrement())
+  name      String
+  image     String
+  description String
+  standardPrice Int
+  rarity Int
 }

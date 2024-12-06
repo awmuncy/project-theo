@@ -16,13 +16,25 @@ TypeScript saves me so much annoyance when my applications get larger than even 
 
 I've been using Next.js for maybe 3 years. I've built applications with create-react-app, but the added features of Next.js have been a huge plus. 
 
+
+
 ## Postgres
 
+(Just kidding, using SQLite for now)
+
 SQL databases just make sense to me. Whether it's SQLite, Postgres, MySQL, or something else, I've always found it to be a great way to store data. I considered MongoDB, which I've used a lot, but I've found it's harder to reason about in anything but the simplest of cases.
+
+## SQLite
+
+Eay way to bootstrap a database for a project. Will switch to postgres soon. Luckily, our next tech decision makes switching betweeen these options easy.
 
 ## Prisma
 
 ORMs are a great way to make it easier to work with databases.
+
+## Clerk
+
+We got users. We'll need authentication. I've used Clerk for a while, and it's been a great experience.
 
 ## CSS (Not just Tailwind)
 
