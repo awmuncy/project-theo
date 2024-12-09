@@ -1,0 +1,41 @@
+{
+    "name": "theo-cli",
+    "version": "0.0.1",
+    "description": "Project Theo CLI",
+    "main": "dist/index.js",
+    "engines": {
+        "npm": "please-use-yarn",
+        "node": "20.x",
+        "yarn": "^1.22.0"
+    },
+    "bin": {
+        "theo": "./dist/index.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "analyze-build": "ts-node -r tsconfig-paths/register ./src/index.ts dev analyze-build",
+        "theo": "ts-node -r tsconfig-paths/register ./src/index.ts",
+        "dev": "ts-node -r tsconfig-paths/register ./src/index.ts dev",
+        "db": "ts-node -r tsconfig-paths/register ./src/index.ts db",
+        "install-global": "yarn global add $PWD",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@json2csv/plainjs": "^7.0.1",
+        "chalk": "^4.1.2",
+        "commander": "^11.0.0",
+        "just-diff": "^6.0.2",
+        "pg": "^8.11.1",
+        "tiny-invariant": "^1.3.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/pg": "^8.10.2",
+        "dotenv": "^16.3.0",
+        "ts-node": "^10.9.1",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "~5.5.4"
+    }
+}

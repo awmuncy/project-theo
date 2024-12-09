@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "rootDir": "../",
+        "outDir": "dist",
+        "strict": true,
+        "target": "es6",
+        "module": "commonjs",
+        "types": ["node"],
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "allowUnreachableCode": true,
+        "isolatedModules": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "paths": {
+            "@/*": ["../src/*"],
+            "@/cli/*": ["./src/*"]
+        }
+    },
+    "include": ["../src/**/*.ts", "./src/**/*.ts"],
+    "exclude": ["node_modules", "cli/node_modules", "**/*.test.ts", "**/*.mock.ts"]
+}
