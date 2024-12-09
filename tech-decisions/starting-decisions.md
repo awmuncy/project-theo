@@ -39,3 +39,7 @@ We got users. We'll need authentication. I've used Clerk for a while, and it's b
 ## CSS (Not just Tailwind)
 
 I love CSS so much, it was my first love in web development. I enjoyed building proper semantics with HTML (accessibility, semantic markup, etc), and functionalities with JavaScript, but building out the _look_ of the application with CSS (and SCSS) was always just so much fun. Frameworks like Tailwind are great for fast developement, but I enjoy the syntax and granularity of CSS. I do think I'll use ShadCN to many components, but I'm not sure yet.
+
+## Local static assets
+
+At some point, I'll need to add some images, fonts, etc. For now, I'm just using the `public` folder to store these assets. In the future, I'll use S3, or Cloudinary, or something similar.
