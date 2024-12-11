@@ -1,7 +1,40 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
+import { getAuthCheck } from "@/service/auth";
 
-export default function Home() {
+
+function LandingPage() {
+  return (
+    <div>
+      <h1>Welcome to Project Theo</h1>
+      <p>A web based game from trading assets</p>
+      <div>IDK man you are not signed in okay.</div>
+    </div>
+  );
+}
+
+export default async function Home() {
+
+  const auth = await getAuthCheck({
+    redirectTo: undefined
+  });
+
+  if(!auth) {
+    return <LandingPage />
+  }
+
+  return <DashboardFeelsWrongForAGame />;
+
+
+}
+
+export function DashboardFeelsWrongForAGame() {
+  return "Hi there";
+}
+
+
+
+export function NextHome() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
