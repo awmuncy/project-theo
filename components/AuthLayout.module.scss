@@ -1,0 +1,30 @@
+.authLayout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 100px 1fr max-content;
+    grid-template-areas:
+        "header header"
+        "sidebar content"
+        "footer footer"
+    ;
+}
+
+.header {
+    grid-area: header;
+    background-color: green;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: red;
+}
+
+.content {
+    grid-area: content;
+    background-color: blue;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: purple;
+}
