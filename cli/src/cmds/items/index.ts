@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { Command } from "commander";
 import { addItemCommand } from "./add-item";
+import { addItemInstanceCommand } from "./add-item-instance";
+import { deleteItemCommand } from "./delete-item";
 
 const prisma = new PrismaClient();
 
@@ -16,4 +18,6 @@ export const itemCommand = async (parent: Command) => {
   });
 
   addItemCommand(itemCmd);
+  deleteItemCommand(itemCmd);
+  addItemInstanceCommand(itemCmd);
 };
