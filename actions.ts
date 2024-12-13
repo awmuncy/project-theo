@@ -1,14 +1,105 @@
-'use server'
- 
-import { redirect } from 'next/navigation'
- 
-export async function scroungeWishingTree() {
+"use server";
 
- 
-  redirect('/inventory')
+import { PrismaClient } from "@prisma/client";
+import { redirect } from "next/navigation";
+
+export async function scroungeWishingTree() {
+  redirect("/inventory");
 }
 
 export async function buyWishingTree() {
+  redirect("/inventory");
+}
 
-  redirect('/inventory')
+const prisma = new PrismaClient();
+
+export async function createLot(
+  userId: string,
+  coins: number,
+  itemIds: number[]
+) {
+  // Make sure the user has enough coins in free inventory
+  const user = await prisma.user.findUnique({
+    where: {
+      id: parseInt(userId),
+    },
+    select: {
+      coins: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User does not exist");
+  }
+
+  if (user.coins < coins) {
+    throw new Error("Not enough coins in free inventory");
+  }
+
+  // Make sure the item exists in the users inventory
+  const items = await prisma.itemInstance.findMany({
+    where: {
+      inventory: {
+        owner: {
+          id: parseInt(userId),
+        },
+      },
+      id: {
+        in: itemIds,
+      },
+    },
+  });
+
+  if (items.length !== itemIds.length) {
+    throw new Error("Not all items exist in the users inventory");
+  }
+
+  // Make sure the items are not already in a lot
+  const lots = await prisma.lot.findMany({
+    where: {
+      user: {
+        id: parseInt(userId),
+      },
+      items: {
+        some: {
+          id: {
+            in: itemIds,
+          },
+        },
+      },
+    },
+  });
+
+  if (lots.length > 0) {
+    throw new Error("Items are already in a lot");
+  }
+
+  // Make sure none of the items are in the inventory
+  console.log("Let's pretend they have the items");
+
+  await prisma.$transaction(async (prisma) => {
+    await prisma.user.update({
+      where: {
+        id: parseInt(userId),
+      },
+      data: {
+        coins: {
+          decrement: coins,
+        },
+      },
+    });
+
+    //Finally, remove from inventory and add to lot
+    await prisma.lot.create({
+      data: {
+        userId: parseInt(userId),
+        coins: coins,
+        items: {
+          connect: items.map((item) => ({
+            id: item.id,
+          })),
+        },
+      },
+    });
+  });
 }
