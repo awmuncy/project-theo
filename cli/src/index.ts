@@ -2,9 +2,11 @@
 import { program } from "./cmd";
 import { itemCommand } from "./cmds/items";
 import { tradesCommand } from "./cmds/trades";
+import { utilCommand } from "./cmds/util";
 
 itemCommand(program);
 tradesCommand(program);
+utilCommand(program);
 
 program.option("-v, --verbose", "Verbose logging");
 
