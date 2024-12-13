@@ -1,9 +1,16 @@
-import { SignOutButton } from "@clerk/nextjs";
 import styles from "./Header.module.scss";
 import Image from "next/image";
-import playfulButton from "./PlayfulButton.module.scss";
 
-export function Header() {
+import { getAuthCheck } from "@/service/auth";
+import { redirect } from "next/navigation";
+
+export async function Header() {
+  const auth = await getAuthCheck();
+
+  if (!auth) {
+    redirect("/");
+  }
+
   return (
     <header className={styles.header}>
       <span className={styles.user}>
@@ -20,13 +27,9 @@ export function Header() {
         </div>
       </span>
       <span className={styles.coins}>
-        <Image height={16} width={16} src="/images/coin.png" alt="Coin" />
-        100
+        <Image height={24} width={24} src="/images/coin.png" alt="Coin" />
+        {auth.coins}
       </span>
-
-      <div className={playfulButton["playful-button"]}>
-        <SignOutButton />
-      </div>
     </header>
   );
 }

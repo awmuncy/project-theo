@@ -2,7 +2,8 @@
 .playful-button>button,
 .playful-button>a
 {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     background: linear-gradient(45deg, #FFC94D, #B3872D);
     text-shadow: 
     .5px .5px 0 white,
@@ -19,6 +20,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
     overflow: hidden;
+    justify-content: space-between;
   }
   
   .playful-button>button::before,
