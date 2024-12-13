@@ -9,6 +9,13 @@ import {
 
 import "./globals.css";
 import AuthedLayout from "@/components/AuthedLayout";
+import { Chewy } from "next/font/google";
+
+const chewy = Chewy({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-chewy",
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,19 +35,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  drawer,
 }: Readonly<{
   children: React.ReactNode;
+  drawer: React.ReactNode;
 }>) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${chewy.variable}`}
+        >
           <SignedOut>
             <SignInButton />
             {children}
           </SignedOut>
           <SignedIn>
             <AuthedLayout>{children}</AuthedLayout>
+            {drawer}
           </SignedIn>
         </body>
       </html>

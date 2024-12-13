@@ -1,0 +1,58 @@
+
+.playful-button>button,
+.playful-button>a
+{
+    display: inline-block;
+    background: linear-gradient(45deg, #FFC94D, #B3872D);
+    text-shadow: 
+    .5px .5px 0 white,
+    -.5px .5px 0 white,
+    .5px -.5px 0 white,
+    -.5px -.5px 0 white;
+    border: 2px solid #806200;
+    color: #806200;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .playful-button>button::before,
+  .playful-button>a::before
+  {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+  }
+  
+  .playful-button>button:hover,
+  .playful-button>a:hover
+  {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .playful-button>button:hover::before,
+  .playful-button>a:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+  
+  .playful-button>button:active,
+  .playful-button>a:active
+  {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

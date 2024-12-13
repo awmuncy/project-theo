@@ -1,7 +1,7 @@
-import { SignOutButton } from "@clerk/nextjs";
 import authLayout from "./AuthLayout.module.scss";
 import { Header } from "./Header";
 import { getAuthCheck } from "@/service/auth";
+import { Sidebar } from "./Sidebar";
 
 type Props = {
   children: React.ReactNode;
@@ -26,13 +26,14 @@ export default async function AuthedLayout({ children }: Props) {
       <div className={authLayout.header}>
         <Header />
       </div>
-      <div className={authLayout.sidebar}>Sidebar</div>
+      <div className={authLayout.sidebar}>
+        <Sidebar />
+      </div>
       <div className={authLayout.content}>{children}</div>
       <div className={authLayout.footer}>
         <SignedInUser />
-
-        <SignOutButton />
       </div>
+      <div className={authLayout.drawer}>Drawer</div>
     </div>
   );
 }
