@@ -11,17 +11,18 @@ datasource db {
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
-  externalId String      @unique
-  email      String      @unique
-  name       String?
-  inventory  Inventory[]
+  id          Int         @id @default(autoincrement())
+  externalId  String      @unique
+  email       String      @unique
+  name        String?
+  inventory   Inventory[]
+  Lot         Lot[]
+  coins       Int         @default(0)
+  bankedCoins Int         @default(0)
 }
 
 model Inventory {
   id            Int            @id @default(autoincrement())
-  name          String
-  quantity      Int
   ownerId       Int
   owner         User           @relation(fields: [ownerId], references: [id])
   items         ItemInstance[]
@@ -34,6 +35,10 @@ model ItemInstance {
   itemId      Int
   inventoryId Int
   inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  Lot         Lot?      @relation(fields: [lotId], references: [id])
+  lotId       Int?
+  Offer       Offer?    @relation(fields: [offerId], references: [id])
+  offerId     Int?
 }
 
 model Item {
@@ -44,4 +49,21 @@ model Item {
   standardPrice Int
   rarity        Int
   ItemInstance  ItemInstance[]
+}
+
+model Lot {
+  id     Int            @id @default(autoincrement())
+  userId Int
+  user   User           @relation(fields: [userId], references: [id])
+  items  ItemInstance[]
+  Offer  Offer[]
+  coins  Int
+}
+
+model Offer {
+  id    Int            @id @default(autoincrement())
+  items ItemInstance[]
+  lot   Lot            @relation(fields: [lotId], references: [id])
+  lotId Int
+  coins Int
 }
