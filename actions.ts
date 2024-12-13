@@ -2,8 +2,57 @@
 
 import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
+import { getAuthCheck } from "./service/auth";
 
+export async function generateItemForUser(userId: number) {
+  // Random number between 1 and 5
+  const randomNumber = Math.floor(Math.random() * 5) + 1;
+
+  // Select a random item and create an instance of it
+  const items = await prisma.item.findMany({
+    where: {
+      rarity: randomNumber,
+    },
+  });
+
+  if (items.length == 0) throw new Error("No items of rarity found");
+
+  const item = items[Math.floor(Math.random() * items.length)];
+
+  if (!item) {
+    throw new Error("No wishing tree item found");
+  }
+
+  // Find inventory of current user with inventoryType of "inventory"
+  const inventory = await prisma.inventory.findFirstOrThrow({
+    where: {
+      inventoryType: "inventory",
+      ownerId: userId,
+    },
+    select: {
+      id: true,
+    },
+    take: 1,
+  });
+
+  // Create an item, and attach it to the user's inventory with inventoryType of "inventory"
+  await prisma.itemInstance.create({
+    data: {
+      itemId: item.id,
+      // Connect to inventory of current user
+      inventoryId: inventory.id,
+    },
+  });
+}
 export async function scroungeWishingTree() {
+  const user = await getAuthCheck();
+
+  if (!user) {
+    throw new Error("User not logged in");
+  }
+
+  generateItemForUser(user.id);
+
   redirect("/inventory");
 }
 
