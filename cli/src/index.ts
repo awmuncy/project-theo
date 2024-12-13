@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 import { program } from "./cmd";
 import { itemCommand } from "./cmds/items";
+import { tradesCommand } from "./cmds/trades";
 
 itemCommand(program);
+tradesCommand(program);
 
 program.option("-v, --verbose", "Verbose logging");
 
