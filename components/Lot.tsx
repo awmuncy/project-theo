@@ -5,6 +5,7 @@ import TradingPostStyles from "./TradingPost.module.scss";
 import playfulButton from "./PlayfulButton.module.scss";
 
 import { CloseLot } from "./CloseLot.client";
+import Link from "next/link";
 
 export function RenderLot({
   auth,
@@ -53,7 +54,7 @@ export function RenderLot({
             <CloseLot lot={lot} />
           </div>
           <div className={playfulButton["playful-button"]}>
-            <button>View offers</button>
+            <Link href={`/trading-post/lot/${lot.id}/offers`}>View offers</Link>
           </div>
         </>
       )}

@@ -46,38 +46,35 @@ export default function CreateLot({
   const itemsForm = watch("items");
 
   return (
-    <div>
-      <h3>Create lot</h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Items</label>
-        <div className={itemStyles.itemList}></div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>Items</label>
+      <div className={itemStyles.itemList}></div>
 
-        {items.map((item, index) => (
-          <div
-            key={item.id}
-            className={`${itemStyles.item} ${
-              itemsForm[index].checked && itemStyles.itemSelected
-            }`}
-            onClick={() => {
-              // Toggle the checked state of the item
-              setValue(`items.${index}.checked`, !itemsForm[index].checked);
-            }}
-          >
-            <Image
-              src={item.item.image}
-              alt={item.item.name}
-              width={100}
-              height={100}
-            />
-          </div>
-        ))}
-
-        <label>Coins</label>
-        <input {...register("coins")} defaultValue={0} type="number" />
-        <div className={playfulButton["playful-button"]}>
-          <button type="submit">Create Lot</button>
+      {items.map((item, index) => (
+        <div
+          key={item.id}
+          className={`${itemStyles.item} ${
+            itemsForm[index].checked && itemStyles.itemSelected
+          }`}
+          onClick={() => {
+            // Toggle the checked state of the item
+            setValue(`items.${index}.checked`, !itemsForm[index].checked);
+          }}
+        >
+          <Image
+            src={item.item.image}
+            alt={item.item.name}
+            width={100}
+            height={100}
+          />
         </div>
-      </form>
-    </div>
+      ))}
+
+      <label>Coins</label>
+      <input {...register("coins")} defaultValue={0} type="number" />
+      <div className={playfulButton["playful-button"]}>
+        <button type="submit">Create Lot</button>
+      </div>
+    </form>
   );
 }
