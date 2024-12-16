@@ -1,6 +1,6 @@
 "use client";
 
-import { scroungeWishingTree } from "@/actions";
+import { pickCoinsOffTree, scroungeWishingTree } from "@/actions";
 import Image from "next/image";
 
 export function WishingTree() {
@@ -16,11 +16,17 @@ export function WishingTree() {
       </button>
       <button
         onClick={() => {
-          console.log("scrounge");
           scroungeWishingTree();
         }}
       >
         Scrounge
+      </button>
+      <button
+        onClick={() => {
+          pickCoinsOffTree();
+        }}
+      >
+        Pick coins off tree
       </button>
       <Image
         src="/images/wishing-tree.png"
