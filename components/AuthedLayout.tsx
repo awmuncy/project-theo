@@ -2,8 +2,7 @@ import authLayout from "./AuthLayout.module.scss";
 import { Header } from "./Header";
 import { getAuthCheck } from "@/service/auth";
 import { Sidebar } from "./Sidebar";
-import { SignOutButton } from "@clerk/nextjs";
-import playfulButton from "./PlayfulButton.module.scss";
+
 import { redirect } from "next/navigation";
 
 type Props = {

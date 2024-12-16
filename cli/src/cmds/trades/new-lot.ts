@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { createLot } from "../../../../actions";
+import { createLotCore } from "../../../../actions";
 
 export function newLotCommand(parent: Command) {
   parent
@@ -8,8 +8,8 @@ export function newLotCommand(parent: Command) {
     .action(
       async (userId: string, coins: string, itemInstanceIds: string[]) => {
         try {
-          await createLot(
-            userId,
+          await createLotCore(
+            parseInt(userId),
             parseInt(coins),
             itemInstanceIds.map((itemId) => parseInt(itemId))
           );

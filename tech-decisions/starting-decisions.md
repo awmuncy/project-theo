@@ -4,19 +4,17 @@ I started this project with a few technologies I've been using for a while.
 
 ## React
 
-I've used React since 2016, and it is one of my favoite frameworks. I've dipped my toes into Vue and Angular in production applications, but it was always within an existing application. I've build many React based applications from scratch. 
+I've used React since 2016, and it is one of my favoite frameworks. I've dipped my toes into Vue and Angular in production applications, but it was always within an existing application. I've build many React based applications from scratch.
 
 I won't pretend to be an impartial judge of React vs other frameworks, but I'll say that I've found it to be a great framework to build applications with. Familiarity with React is a huge plus, and I've found it to be a great way to learn new technologies.
 
 ## TypeScript
 
-TypeScript saves me so much annoyance when my applications get larger than even the tiniest pet projects. The code is so much more maintainable, and is also just makes it easier to understand what the heck is going on. 
+TypeScript saves me so much annoyance when my applications get larger than even the tiniest pet projects. The code is so much more maintainable, and is also just makes it easier to understand what the heck is going on.
 
 ## Next.js
 
-I've been using Next.js for maybe 3 years. I've built applications with create-react-app, but the added features of Next.js have been a huge plus. 
-
-
+I've been using Next.js for maybe 3 years. I've built applications with create-react-app, but the added features of Next.js have been a huge plus.
 
 ## Postgres
 
@@ -43,3 +41,5 @@ I love CSS so much, it was my first love in web development. I enjoyed building 
 ## Local static assets
 
 At some point, I'll need to add some images, fonts, etc. For now, I'm just using the `public` folder to store these assets. In the future, I'll use S3, or Cloudinary, or something similar.
+
+## React Hook Forms

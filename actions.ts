@@ -142,15 +142,28 @@ export async function pickCoinsOffTree() {
 
 const prisma = new PrismaClient();
 
-export async function createLot(
-  userId: string,
+export async function createLot(coins: string, itemIds: string[]) {
+  const user = await getAuthCheck();
+
+  if (!user) {
+    throw new Error("User not logged in");
+  }
+
+  // Convert itemIds to numbers
+  const itemIdsConverted = itemIds.map((itemId) => parseInt(itemId));
+
+  await createLotCore(user.id, parseInt(coins), itemIdsConverted);
+}
+
+export async function createLotCore(
+  userId: number,
   coins: number,
   itemIds: number[]
 ) {
   // Make sure the user has enough coins in free inventory
   const user = await prisma.user.findUnique({
     where: {
-      id: parseInt(userId),
+      id: userId,
     },
     select: {
       coins: true,
@@ -170,7 +183,7 @@ export async function createLot(
     where: {
       inventory: {
         owner: {
-          id: parseInt(userId),
+          id: userId,
         },
       },
       id: {
@@ -187,7 +200,7 @@ export async function createLot(
   const lots = await prisma.lot.findMany({
     where: {
       user: {
-        id: parseInt(userId),
+        id: userId,
       },
       items: {
         some: {
@@ -209,7 +222,7 @@ export async function createLot(
   await prisma.$transaction(async (prisma) => {
     await prisma.user.update({
       where: {
-        id: parseInt(userId),
+        id: userId,
       },
       data: {
         coins: {
@@ -221,7 +234,7 @@ export async function createLot(
     //Finally, remove from inventory and add to lot
     await prisma.lot.create({
       data: {
-        userId: parseInt(userId),
+        userId: userId,
         coins: coins,
         items: {
           connect: items.map((item) => ({
