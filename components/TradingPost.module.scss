@@ -2,11 +2,27 @@
     border: 1px solid #666;
     padding: 10px;
     display: flex;
+    flex-direction: column;
     gap: 1px;
+    border-radius: 15px;
+}
+
+.lotItems {
+    list-style-type: none;
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lotItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .lots {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 10px;
 }

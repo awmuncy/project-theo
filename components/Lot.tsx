@@ -2,6 +2,9 @@ import { Item, Lot, User } from "@prisma/client";
 
 import Image from "next/image";
 import TradingPostStyles from "./TradingPost.module.scss";
+import playfulButton from "./PlayfulButton.module.scss";
+
+import { CloseLot } from "./CloseLot.client";
 
 export function RenderLot({
   auth,
@@ -19,27 +22,40 @@ export function RenderLot({
   return (
     <div key={lot.id} className={TradingPostStyles.lot}>
       <h2>Lot #{lot.id}</h2>
-      <p>
-        {lot.coins} coins
-        <Image src={"/images/coin.png"} alt="Coin" width={32} height={32} />
-      </p>
-      <ul>
+
+      <ul className={TradingPostStyles.lotItems}>
+        {lot.coins > 0 && (
+          <li className={TradingPostStyles.lotItem}>
+            <Image src={"/images/coin.png"} alt="Coin" width={32} height={32} />
+            {lot.coins} coins
+          </li>
+        )}
         {lot.items.map((item) => (
-          <li key={item.id}>
-            {item.item.name}
+          <li key={item.id} className={TradingPostStyles.lotItem}>
             <Image
               src={item.item.image}
               alt={item.item.name}
               width={32}
               height={32}
             />
+            {item.item.name}
           </li>
         ))}
       </ul>
+
       {lot.user.id !== auth?.id ? (
-        <button>Make offer</button>
+        <div className={playfulButton["playful-button"]}>
+          <button>Make offer</button>
+        </div>
       ) : (
-        <button>View offers</button>
+        <>
+          <div className={playfulButton["playful-button"]}>
+            <CloseLot lot={lot} />
+          </div>
+          <div className={playfulButton["playful-button"]}>
+            <button>View offers</button>
+          </div>
+        </>
       )}
     </div>
   );
