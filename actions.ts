@@ -60,6 +60,86 @@ export async function buyWishingTree() {
   redirect("/inventory");
 }
 
+export async function closeLotCore(lotId: number) {
+  await prisma.$transaction(async (prisma) => {
+    const lot = await prisma.lot.findUnique({
+      where: {
+        id: lotId,
+      },
+    });
+
+    if (!lot) {
+      throw new Error("Lot does not exist");
+    }
+
+    const coins = lot.coins;
+
+    await prisma.user.update({
+      where: {
+        id: lot.userId,
+      },
+      data: {
+        coins: {
+          increment: coins,
+        },
+      },
+    });
+
+    await prisma.lot.delete({
+      where: {
+        id: lotId,
+      },
+    });
+  });
+  return;
+}
+export async function closeLot(lotId: number) {
+  const user = await getAuthCheck();
+
+  if (!user) {
+    throw new Error("User not logged in");
+  }
+
+  const lotOwner = await prisma.lot.findFirstOrThrow({
+    where: {
+      id: lotId,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  if (lotOwner.user.id !== user.id) {
+    throw new Error("You do not own this lot");
+  }
+
+  closeLotCore(lotId);
+
+  redirect("/inventory");
+}
+
+export async function pickCoinsOffTree() {
+  const user = await getAuthCheck();
+
+  if (!user) {
+    throw new Error("User not logged in");
+  }
+
+  // Add coins to user's free inventory
+  await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      coins: {
+        increment: 10,
+      },
+    },
+  });
+
+  redirect("/inventory");
+}
+
 const prisma = new PrismaClient();
 
 export async function createLot(
