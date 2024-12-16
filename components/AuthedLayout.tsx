@@ -26,11 +26,7 @@ export default async function AuthedLayout({ children }: Props) {
         <Sidebar />
       </div>
       <div className={authLayout.content}>{children}</div>
-      <div className={authLayout.footer}>
-        <div className={playfulButton["playful-button"]}>
-          <SignOutButton />
-        </div>
-      </div>
+      <div className={authLayout.footer}></div>
       <div className={authLayout.drawer}>Drawer</div>
     </div>
   );

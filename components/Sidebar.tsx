@@ -2,6 +2,7 @@ import Link from "next/link";
 import playfulButton from "./PlayfulButton.module.scss";
 import styles from "./Sidebar.module.scss";
 import Image from "next/image";
+import { SignOutButton } from "@clerk/nextjs";
 
 export function Sidebar() {
   return (
@@ -50,6 +51,9 @@ export function Sidebar() {
               height={32}
             />
           </Link>
+        </li>
+        <li className={playfulButton["playful-button"]}>
+          <SignOutButton />
         </li>
       </ul>
     </nav>
