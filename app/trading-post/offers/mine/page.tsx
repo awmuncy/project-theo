@@ -1,11 +1,9 @@
 import { WithdrawOffer } from "@/components/OfferButtons.client";
 import { getAuthCheck } from "@/service/auth";
-import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import playfulButton from "@/components/PlayfulButton.module.scss";
-
-const prisma = new PrismaClient();
+import { getOffers } from "@/service/trading-post";
 
 export default async function MyOffers() {
   const auth = await getAuthCheck();
@@ -14,28 +12,7 @@ export default async function MyOffers() {
     return <div>You are not logged in</div>;
   }
 
-  const offers = await prisma.offer.findMany({
-    where: {
-      userId: auth.id,
-    },
-    include: {
-      items: {
-        include: {
-          item: true,
-        },
-      },
-      lot: {
-        include: {
-          user: true,
-          items: {
-            include: {
-              item: true,
-            },
-          },
-        },
-      },
-    },
-  });
+  const offers = await getOffers(auth.id);
 
   return (
     <div>

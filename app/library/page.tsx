@@ -1,11 +1,8 @@
 import { Library } from "@/components/Library";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient()
+import { getItemSpecs } from "@/service/item-specs";
 
 export default async function Home() {
-
-    const items = await prisma.item.findMany();
+  const items = await getItemSpecs();
 
   return (
     <div className="container">

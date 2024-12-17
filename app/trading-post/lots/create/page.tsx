@@ -1,8 +1,6 @@
 import CreateLot from "@/components/CreateLot.client";
 import { getAuthCheck } from "@/service/auth";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { getInventory } from "@/service/inventory";
 
 export default async function CreateLotPage() {
   const user = await getAuthCheck();
@@ -12,21 +10,7 @@ export default async function CreateLotPage() {
   }
 
   // Get all current user's inventory items
-  const items = await prisma.itemInstance.findMany({
-    where: {
-      inventory: {
-        owner: {
-          id: user.id,
-        },
-      },
-      lotId: null,
-      offerId: null,
-    },
-
-    include: {
-      item: true,
-    },
-  });
+  const items = await getInventory(user.id);
 
   return (
     <div>

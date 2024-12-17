@@ -1,11 +1,9 @@
-import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
 import playfulButton from "@/components/PlayfulButton.module.scss";
 import Link from "next/link";
 
 import { AcceptOffer, RejectOffer } from "@/components/OfferButtons.client";
-
-const prisma = new PrismaClient();
+import { getOffers } from "@/service/trading-post";
 
 export default async function OfferPage({
   params,
@@ -17,18 +15,7 @@ export default async function OfferPage({
   const { lotId } = await params;
   // TODO: Right now anyone can view offers, but we need to make sure only the owner can view their own offers
 
-  const offers = await prisma.offer.findMany({
-    where: {
-      lotId: parseInt(lotId),
-    },
-    include: {
-      items: {
-        include: {
-          item: true,
-        },
-      },
-    },
-  });
+  const offers = await getOffers(undefined, parseInt(lotId));
 
   return (
     <div>

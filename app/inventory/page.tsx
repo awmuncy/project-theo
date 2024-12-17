@@ -1,37 +1,19 @@
 import { InventoryItem } from "@/components/InventoryItem";
 import { getAuthCheck } from "@/service/auth";
-import { PrismaClient } from "@prisma/client";
+
 import styles from "@/components/Inventory.module.scss";
 import Link from "next/link";
 import playfulButton from "@/components/PlayfulButton.module.scss";
-const prisma = new PrismaClient();
+import { getInventory } from "@/service/inventory";
 
 export default async function Home() {
   const auth = await getAuthCheck();
 
-  // WTF is this actually doing?
-  // Answer:
-  const items = await prisma.itemInstance.findMany({
-    where: {
-      inventory: {
-        inventoryType: "inventory",
-        owner: {
-          id: auth?.id,
-        },
-      },
-      AND: {
-        lotId: null,
-        offerId: null,
-      },
-    },
-    include: {
-      item: {
-        include: {
-          ItemInstance: true,
-        },
-      },
-    },
-  });
+  if (!auth) {
+    return <div>You are not signed in</div>;
+  }
+
+  const inventory = await getInventory(auth?.id);
 
   return (
     <div className="container">
@@ -42,7 +24,7 @@ export default async function Home() {
           </div>
         </div>
         <div className={styles.inventory}>
-          {items.map((item) => (
+          {inventory.map((item) => (
             <InventoryItem key={item.id} item={item.item} />
           ))}
         </div>
