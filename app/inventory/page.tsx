@@ -1,9 +1,9 @@
 import { InventoryItem } from "@/components/InventoryItem";
 import { getAuthCheck } from "@/service/auth";
 import { PrismaClient } from "@prisma/client";
-import styles from "../../components/Inventory.module.scss";
+import styles from "@/components/Inventory.module.scss";
 import Link from "next/link";
-import playfulButton from "../../components/PlayfulButton.module.scss";
+import playfulButton from "@/components/PlayfulButton.module.scss";
 const prisma = new PrismaClient();
 
 export default async function Home() {

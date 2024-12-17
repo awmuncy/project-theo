@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
-import playfulButton from "../../../../../components/PlayfulButton.module.scss";
+import playfulButton from "@/components/PlayfulButton.module.scss";
 import Link from "next/link";
 
 import { AcceptOffer, RejectOffer } from "@/components/OfferButtons.client";

@@ -1,6 +1,9 @@
+import { WithdrawOffer } from "@/components/OfferButtons.client";
 import { getAuthCheck } from "@/service/auth";
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
+import playfulButton from "@/components/PlayfulButton.module.scss";
 
 const prisma = new PrismaClient();
 
@@ -59,14 +62,12 @@ export default async function MyOffers() {
             <h4>Coins</h4>
             {offer.coins}
           </div>
-          {/* <div className={playfulButton["playful-button"]}>
+          <div className={playfulButton["playful-button"]}>
             <Link href={`/trading-post/lot/${offer.lot.id}/offer/${offer.id}`}>
               View offer
             </Link>
-            <AcceptOffer offerId={offer.id} />
-
-            <RejectOffer offerId={offer.id} />
-          </div> */}
+            <WithdrawOffer offerId={offer.id} />
+          </div>
         </div>
       ))}
     </div>

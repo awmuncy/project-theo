@@ -1,5 +1,5 @@
 import Link from "next/link";
-import playfulButton from "../../components/PlayfulButton.module.scss";
+import playfulButton from "@/components/PlayfulButton.module.scss";
 
 export default function TradingPostLayout({
   children,

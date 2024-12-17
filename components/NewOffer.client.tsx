@@ -5,7 +5,7 @@ import { Item, ItemInstance } from "@prisma/client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import itemStyles from "./Item.module.scss";
-import playfulButton from "../components/PlayfulButton.module.scss";
+import playfulButton from "@/components/PlayfulButton.module.scss";
 
 type ItemInput = {
   id: number;

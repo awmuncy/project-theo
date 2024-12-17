@@ -1,6 +1,6 @@
 "use client";
 
-import { acceptOffer, rejectOffer } from "@/actions";
+import { acceptOffer, rejectOffer, withdrawOffer } from "@/actions";
 
 export function RejectOffer({ offerId }: { offerId: number }) {
   return (
@@ -25,6 +25,20 @@ export function AcceptOffer({ offerId }: { offerId: number }) {
         }}
       >
         Accept offer
+      </button>
+    </div>
+  );
+}
+
+export function WithdrawOffer({ offerId }: { offerId: number }) {
+  return (
+    <div>
+      <button
+        onClick={() => {
+          withdrawOffer(offerId);
+        }}
+      >
+        Withdraw offer
       </button>
     </div>
   );
