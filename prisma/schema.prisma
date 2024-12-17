@@ -13,6 +13,7 @@ datasource db {
 model User {
   id          Int         @id @default(autoincrement())
   createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
   externalId  String      @unique
   email       String      @unique
   name        String?
@@ -25,6 +26,8 @@ model User {
 
 model Inventory {
   id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
   ownerId       Int
   owner         User           @relation(fields: [ownerId], references: [id])
   items         ItemInstance[]
@@ -34,6 +37,7 @@ model Inventory {
 model ItemInstance {
   id          Int       @id @default(autoincrement())
   createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
   item        Item      @relation(fields: [itemId], references: [id])
   itemId      Int
   inventoryId Int
@@ -47,6 +51,7 @@ model ItemInstance {
 model Item {
   id            Int            @id @default(autoincrement())
   createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
   name          String
   image         String
   description   String
@@ -58,6 +63,7 @@ model Item {
 model Lot {
   id        Int            @id @default(autoincrement())
   createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now()) @updatedAt
   userId    Int
   user      User           @relation(fields: [userId], references: [id])
   items     ItemInstance[]
@@ -68,6 +74,7 @@ model Lot {
 model Offer {
   id        Int            @id @default(autoincrement())
   createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now()) @updatedAt
   userId    Int
   user      User           @relation(fields: [userId], references: [id])
   items     ItemInstance[]
