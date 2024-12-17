@@ -247,7 +247,7 @@ export async function createLotCore(
 }
 
 export async function createOffer(
-  lotId: number,
+  lotId: string,
   coins: string,
   itemIds: string[]
 ) {
@@ -257,7 +257,7 @@ export async function createOffer(
     throw new Error("User not logged in");
   }
 
-  await createOfferCore(authUser.id, lotId, parseInt(coins), itemIds);
+  await createOfferCore(authUser.id, parseInt(lotId), parseInt(coins), itemIds);
 
   redirect("/inventory");
 }
@@ -310,20 +310,31 @@ export async function createOfferCore(
     throw new Error("Not all items exist in the users inventory");
   }
 
-  const offer = await prisma.offer.create({
-    data: {
-      userId: userId,
-      coins: coins,
-      items: {
-        connect: items.map((item) => ({
-          id: item.id,
-        })),
+  await prisma.$transaction(async (prisma) => {
+    await prisma.user.update({
+      where: {
+        id: userId,
       },
-      lotId: lotId,
-    },
-  });
+      data: {
+        coins: {
+          decrement: coins,
+        },
+      },
+    });
 
-  return offer;
+    await prisma.offer.create({
+      data: {
+        userId: userId,
+        coins: coins,
+        items: {
+          connect: items.map((item) => ({
+            id: item.id,
+          })),
+        },
+        lotId: lotId,
+      },
+    });
+  });
 }
 
 export async function rejectOffer(offerId: number) {

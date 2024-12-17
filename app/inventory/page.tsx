@@ -38,9 +38,6 @@ export default async function Home() {
           <div className={playfulButton["playful-button"]}>
             <Link href="/trading-post/lots/mine">My Lots</Link>
           </div>
-          <div className={playfulButton["playful-button"]}>
-            <Link href="/inventory/sdb">Safety deposit box</Link>
-          </div>
         </div>
         <div className={styles.inventory}>
           {items.map((item) => (

@@ -46,7 +46,7 @@ export function RenderLot({
 
       {lot.user.id !== auth?.id ? (
         <div className={playfulButton["playful-button"]}>
-          <button>Make offer</button>
+          <Link href={`/trading-post/lot/${lot.id}/offer`}>Make offer</Link>
         </div>
       ) : (
         <>
