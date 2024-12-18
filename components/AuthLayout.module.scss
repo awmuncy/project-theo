@@ -1,6 +1,9 @@
 .authLayout {
     display: grid;
+    padding: 10px 0px;
     grid-template-columns: 200px 1fr;
+    max-width: 1000px;
+    margin: 0 auto;
     grid-template-rows: 60px 1fr max-content;
     grid-template-areas:
         "header header"
@@ -11,6 +14,7 @@
 
 .header {
     grid-area: header;
+    max-width: 900px;
 
 }
 
@@ -22,6 +26,11 @@
 .content {
     grid-area: content;
     padding: 10px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #FFF;
+    margin: 10px;
+    border-radius: 15px;
 }
 
 .footer {

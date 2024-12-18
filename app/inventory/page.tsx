@@ -1,9 +1,6 @@
 import { InventoryItem } from "@/components/InventoryItem";
 import { getAuthCheck } from "@/service/auth";
-
 import styles from "@/components/Inventory.module.scss";
-import Link from "next/link";
-import playfulButton from "@/components/PlayfulButton.module.scss";
 import { getInventory } from "@/service/inventory";
 
 export default async function Home() {
@@ -18,12 +15,10 @@ export default async function Home() {
   return (
     <div className="container">
       <main className="main">
-        <div>
-          <div className={playfulButton["playful-button"]}>
-            <Link href="/trading-post/lots/mine">My Lots</Link>
-          </div>
-        </div>
         <div className={styles.inventory}>
+          {inventory.length ? null : (
+            <div>You have no items in your inventory</div>
+          )}
           {inventory.map((item) => (
             <InventoryItem key={item.id} item={item.item} />
           ))}

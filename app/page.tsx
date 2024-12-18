@@ -23,5 +23,10 @@ export default async function Home() {
 }
 
 export function DashboardFeelsWrongForAGame() {
-  return "Hi there";
+  return (
+    <>
+      <h1>Home</h1>
+      <p>Welcome to Fantopia</p>
+    </>
+  );
 }

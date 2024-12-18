@@ -13,8 +13,8 @@ export function InventoryItem({ item }: { item: Item }) {
       <Image
         src={item.image}
         alt="item"
-        width={128}
-        height={128}
+        width={100}
+        height={100}
         className="item"
       />
     </div>

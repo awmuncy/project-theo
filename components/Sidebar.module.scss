@@ -1,12 +1,13 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
   padding: 10px;
   list-style-type: none;
   align-items: center;
   background-color: #FFE9CD;
   border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
   &>li {
     display: flex;
     justify-content: center;
