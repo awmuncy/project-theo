@@ -22,6 +22,7 @@ model User {
   coins       Int         @default(0)
   bankedCoins Int         @default(0)
   Offer       Offer[]
+  Shop        Shop[]
 }
 
 model Inventory {
@@ -58,6 +59,7 @@ model Item {
   standardPrice Int
   rarity        Int
   ItemInstance  ItemInstance[]
+  ShopItem      ShopItem[]
 }
 
 model Lot {
@@ -81,4 +83,28 @@ model Offer {
   lot       Lot            @relation(fields: [lotId], references: [id])
   lotId     Int
   coins     Int
+}
+
+model Shop {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now()) @updatedAt
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id])
+  items     ShopItem[]
+  till      Int        @default(0)
+  shopSize  Int        @default(10)
+}
+
+model ShopItem {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  itemId    Int
+  price     Int
+  item      Item     @relation(fields: [itemId], references: [id])
+  shopId    Int
+  shop      Shop     @relation(fields: [shopId], references: [id])
+
+  @@unique([itemId, shopId])
 }
