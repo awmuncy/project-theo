@@ -20,12 +20,23 @@ const checkForUserInDB = async (userId: string) => {
 
 const createUser = async (user: User) => {
   console.log("Gonna create a new user");
+
   const newUser = await prisma.user
     .create({
       data: {
         externalId: user.id,
         email: user.emailAddresses[0].emailAddress,
         name: `${user.firstName} ${user.lastName}`,
+        inventory: {
+          create: {
+            inventoryType: "inventory",
+          },
+        },
+        Shop: {
+          create: {
+            till: 0,
+          },
+        },
       },
     })
     .catch((err) => {
