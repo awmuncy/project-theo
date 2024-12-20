@@ -22,8 +22,8 @@ export async function Header() {
           className={styles.avatar}
         />
         <div className={styles.userInfo}>
-          <span className={styles.nickName}>Allen Muncy</span>
-          <span className={styles.userName}>awmuncy</span>
+          <span className={styles.nickName}>{auth.name}</span>
+          <span className={styles.userName}>{auth.username}</span>
         </div>
       </span>
       <span className={styles.coins}>

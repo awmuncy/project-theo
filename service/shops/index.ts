@@ -13,19 +13,12 @@ export async function createShop(userId: number) {
   return shop;
 }
 
-function userLookup(shopNameOrUserId: number) {
-  return shopNameOrUserId;
-}
-export async function getShop(shopNameOrUserId: number, visitorId: number) {
-  const userId = userLookup(shopNameOrUserId);
-
-  if (userId !== visitorId) {
-    throw new Error("You are not allowed to view this shop");
-  }
-
-  const items = await prisma.shop.findFirst({
+export async function getShop(shopNameOrUserId: string) {
+  const shop = await prisma.shop.findFirst({
     where: {
-      userId: shopNameOrUserId,
+      user: {
+        username: shopNameOrUserId,
+      },
     },
     include: {
       items: {
@@ -41,7 +34,7 @@ export async function getShop(shopNameOrUserId: number, visitorId: number) {
     },
   });
 
-  return items;
+  return shop;
 }
 
 export async function addItemsToShop(shopId: number, itemIds: number[]) {
@@ -51,6 +44,16 @@ export async function addItemsToShop(shopId: number, itemIds: number[]) {
       shopId,
     },
   });
+
+  const shop = await prisma.shop.findUnique({
+    where: {
+      id: shopId,
+    },
+  });
+
+  if (!shop) {
+    throw new Error("Shop does not exist");
+  }
 
   if (itemsInShop >= shop.shopSize) {
     throw new Error("Shop is full");

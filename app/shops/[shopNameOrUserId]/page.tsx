@@ -12,7 +12,7 @@ export default async function Shop({
   const { shopNameOrUserId } = await params;
   const auth = await getAuthCheck();
   if (!auth) return <div>You are not logged in</div>;
-  const shop = await getShop(Number(shopNameOrUserId), auth?.id);
+  const shop = await getShop(shopNameOrUserId);
   if (!shop) return <div>Shop not found</div>;
   return (
     <div>

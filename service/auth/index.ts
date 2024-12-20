@@ -18,6 +18,42 @@ const checkForUserInDB = async (userId: string) => {
   return null;
 };
 
+const gen_username = () => {
+  const adjectives = [
+    "Adorable",
+    "Adventurous",
+    "Agile",
+    "Amazing",
+    "Amusing",
+    "Artistic",
+    "Beautiful",
+    "Brave",
+    "Calm",
+    "Charming",
+    "Cheerful",
+    "Creative",
+    "Curious",
+    "Cute",
+    "Delightful",
+  ];
+  const nouns = [
+    "Animals",
+    "Ants",
+    "Apples",
+    "Baboons",
+    "Badgers",
+    "Balloons",
+    "Bananas",
+    "Bears",
+    "Bees",
+    "Birds",
+  ];
+  const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const noun = nouns[Math.floor(Math.random() * nouns.length)];
+
+  return `${adjective}-${noun}`;
+};
+
 const createUser = async (user: User) => {
   console.log("Gonna create a new user");
 
@@ -25,6 +61,7 @@ const createUser = async (user: User) => {
     .create({
       data: {
         externalId: user.id,
+        username: gen_username(),
         email: user.emailAddresses[0].emailAddress,
         name: `${user.firstName} ${user.lastName}`,
         inventory: {
