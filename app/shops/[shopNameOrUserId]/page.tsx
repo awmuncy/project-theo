@@ -5,9 +5,9 @@ import { getAuthCheck } from "@/service/auth";
 export default async function Shop({
   params,
 }: {
-  params: {
+  params: Promise<{
     shopNameOrUserId: string;
-  };
+  }>;
 }) {
   const { shopNameOrUserId } = await params;
   const auth = await getAuthCheck();

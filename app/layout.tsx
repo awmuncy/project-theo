@@ -35,10 +35,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  drawer,
 }: Readonly<{
   children: React.ReactNode;
-  drawer: React.ReactNode;
 }>) {
   return (
     <ClerkProvider>
@@ -52,7 +50,6 @@ export default function RootLayout({
           </SignedOut>
           <SignedIn>
             <AuthedLayout>{children}</AuthedLayout>
-            {drawer}
           </SignedIn>
         </body>
       </html>

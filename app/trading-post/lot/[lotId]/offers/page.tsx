@@ -8,9 +8,9 @@ import { getOffers } from "@/service/trading-post";
 export default async function OfferPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     lotId: string;
-  };
+  }>;
 }) {
   const { lotId } = await params;
   // TODO: Right now anyone can view offers, but we need to make sure only the owner can view their own offers

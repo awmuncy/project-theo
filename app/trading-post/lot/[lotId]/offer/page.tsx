@@ -5,7 +5,7 @@ import { getInventory } from "@/service/inventory";
 export default async function OfferPage({
   params,
 }: {
-  params: { lotId: string };
+  params: Promise<{ lotId: string }>;
 }) {
   const { lotId } = await params;
 

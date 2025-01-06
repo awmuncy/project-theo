@@ -22,7 +22,7 @@ export default async function Home() {
   return <DashboardFeelsWrongForAGame />;
 }
 
-export function DashboardFeelsWrongForAGame() {
+function DashboardFeelsWrongForAGame() {
   return (
     <>
       <h1>Home</h1>
