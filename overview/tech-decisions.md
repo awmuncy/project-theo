@@ -2,6 +2,10 @@
 
 I started this project with a few technologies I've been using for a while.
 
+## Linear
+
+Okay, this doesn't really fit into the tech stack, but Linear is a great way to manage your projects. I use it for software projects, and it's a great way to keep track of your tasks, deadlines, and progress.
+
 ## React
 
 I've used React since 2016, and it is one of my favoite frameworks. I've dipped my toes into Vue and Angular in production applications, but it was always within an existing application. I've build many React based applications from scratch.
