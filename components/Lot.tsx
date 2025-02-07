@@ -31,6 +31,7 @@ export function RenderLot({
             {lot.coins} coins
           </li>
         )}
+        
         {lot.items.map((item) => (
           <li key={item.id} className={TradingPostStyles.lotItem}>
             <Image

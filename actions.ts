@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 
 export async function generateItemForUser(userId: number) {
   // Random number between 1 and 5
+ 
   const randomNumber = Math.floor(Math.random() * 5) + 1;
-
   // Select a random item and create an instance of it
   const items = await prisma.item.findMany({
     where: {
@@ -52,9 +52,9 @@ export async function scroungeWishingTree() {
   if (!user) {
     throw new Error("User not logged in");
   }
-
+  
   generateItemForUser(user.id);
-
+  
   redirect("/inventory");
 }
 

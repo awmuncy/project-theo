@@ -10,11 +10,11 @@ export function WishingTree() {
     <div className={`wishing-tree ${layouts.wishingTree}`}>
       <h1>Wishing Tree</h1>
       <Image
-        src="/images/wishing-tree.png"
+        src="/images/wishing-tree.png" 
         alt="wishing tree"
-        width={350}
         height={350}
-      />
+        width={350} 
+        />
       <div className={playfulButton["playful-button"]}>
         <button
           onClick={() => {
